@@ -135,31 +135,31 @@ struct Key specialKeys[] = {
 size_t nSpecialKeys = sizeof(specialKeys) / sizeof(Key);
 
 LPCWSTR mouseActions[] = {
-    L"MouseMove",
-    L"LButtonDown",
-    L"LButtonUp",
-    L"LButtonDBLCLK",
-    L"RButtonDown",
-    L"RButtonUp",
-    L"RButtonDBLCLK",
-    L"MButtonDown",
-    L"MButtonUp",
-    L"MButtonDBLCLK",
-    L"MouseWheel",
-    L"XButtonDown",
-    L"XButtonUp",
-    L"XButtonDBLCLK",
-    L"MouseHWheel"
+    L"鼠标移动",
+    L"左键按下",
+    L"左键抬起",
+    L"左键双击",
+    L"右键按下",
+    L"右键抬起",
+    L"右键双击",
+    L"中键按下",
+    L"中键抬起",
+    L"中键双击",
+    L"滚动滚轮",
+    L"侧键按下",
+    L"侧键抬起",
+    L"侧键双击",
+    L"横向滚轮滚动"
 };
 LPCWSTR mouseClicks[] = {
-    L"LClick",
-    L"RClick",
-    L"MClick"
+    L"鼠标左键",
+    L"鼠标右键",
+    L"鼠标中键"
 };
 LPCWSTR mouseDblClicks[] = {
-    L"LDblClick",
-    L"RDblClick",
-    L"MDblClick"
+    L"左键双击",
+    L"右键双击",
+    L"中键双击"
 };
 
 size_t nMouseActions = sizeof(mouseActions) / sizeof(LPCWSTR);
@@ -395,7 +395,7 @@ LRESULT CALLBACK LLMouseProc(int nCode, WPARAM wp, LPARAM lp)
 
         if (!(ms->flags & LLMHF_INJECTED)) {
             if(idx == 10) {
-                swprintf(c, 64, (int)(ms->mouseData) > 0 ? L"%sUp" : L"%sDown", mouseActions[idx]);
+                swprintf(c, 64, (int)(ms->mouseData) > 0 ? L"向上%s" : L"向下%s", mouseActions[idx]);
             } else if(mergeMouseActions) {
                 switch (idx) {
                     case 1:
