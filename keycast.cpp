@@ -808,8 +808,8 @@ BOOL CALLBACK SettingsWndProc(HWND hwndDlg, UINT msg, WPARAM wParam, LPARAM lPar
                 GetWindowRect(hwndDlg, &settingsDlgRect);
                 CreateToolTip(hwndDlg, IDC_COMBSCHEME, L"设置为“[+]”让显示的组合按钮变成“[Alt + Tab]”.");
                 HWND hCtrl = GetDlgItem(hwndDlg, IDC_ALIGNMENT);
-                ComboBox_InsertString(hCtrl, 0, L"Left");
-                ComboBox_InsertString(hCtrl, 1, L"Right");
+                ComboBox_InsertString(hCtrl, 0, L"左");
+                ComboBox_InsertString(hCtrl, 1, L"右");
             }
             return TRUE;
         case WM_NOTIFY:
@@ -995,16 +995,16 @@ LRESULT CALLBACK WindowFunc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lPara
                 nid.uFlags              = NIF_ICON | NIF_MESSAGE | NIF_TIP;
                 nid.uCallbackMessage    = WM_TRAYMSG;
                 nid.hIcon = LoadIcon( hInstance, MAKEINTRESOURCE(IDI_ICON1));
-                lstrcpy( nid.szTip, L"KeyCast On Windows by brook hong" );
+                lstrcpy( nid.szTip, L"基于 Windows 的按键捕捉" );
                 Shell_NotifyIcon( NIM_ADD, &nid );
 
                 hPopMenu = CreatePopupMenu();
-                AppendMenu( hPopMenu, MF_STRING, MENU_CONFIG,  L"&Settings..." );
-                AppendMenu( hPopMenu, MF_STRING, MENU_RESTORE,  L"&Restore default settings" );
+                AppendMenu( hPopMenu, MF_STRING, MENU_CONFIG,  L"设置(&S)..." );
+                AppendMenu( hPopMenu, MF_STRING, MENU_RESTORE,  L"恢复默认设置(&R)" );
 #ifdef _DEBUG
-                AppendMenu( hPopMenu, MF_STRING, MENU_REPLAY,  L"Re&play" );
+                AppendMenu( hPopMenu, MF_STRING, MENU_REPLAY,  L"回放(&P)" );
 #endif
-                AppendMenu( hPopMenu, MF_STRING, MENU_EXIT,    L"E&xit" );
+                AppendMenu( hPopMenu, MF_STRING, MENU_EXIT,    L"退出(&X)" );
                 SetMenuDefaultItem( hPopMenu, MENU_CONFIG, FALSE );
             }
             break;
@@ -1049,7 +1049,7 @@ LRESULT CALLBACK WindowFunc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lPara
                         {
                             if(replayStatus == 1) {
                                 replayStatus = 2;
-                                ModifyMenu( hPopMenu, MENU_REPLAY, MF_STRING, MENU_REPLAY, L"Re&play");
+                                ModifyMenu( hPopMenu, MENU_REPLAY, MF_STRING, MENU_REPLAY, L"回放(&P)");
                             } else {
                                 OPENFILENAME ofn;
                                 ZeroMemory(&ofn, sizeof(OPENFILENAME));
@@ -1062,7 +1062,7 @@ LRESULT CALLBACK WindowFunc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lPara
                                 if(GetOpenFileName(&ofn)) {
                                     unsigned long id = 1;
                                     CreateThread(NULL,0,replay,recordFN,0,&id);
-                                    ModifyMenu( hPopMenu, MENU_REPLAY, MF_STRING, MENU_REPLAY, L"Stop re&play");
+                                    ModifyMenu( hPopMenu, MENU_REPLAY, MF_STRING, MENU_REPLAY, L"停止回放(&P)");
                                 }
                             }
                         }
